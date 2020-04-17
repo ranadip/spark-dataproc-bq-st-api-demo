@@ -19,7 +19,7 @@ object SparkBQExample {
     spark.sparkContext.setLogLevel("ERROR")
 
     val platinumDeepVariantDf = spark.read.bigquery("bigquery-public-data.human_genome_variants.platinum_genomes_deepvariant_variants_20180823")
-      //    val platinumDeepVariantDf = spark.read.bigquery("ran-gcct-prj1.amst.platinum_genomes_deepvariant_variants_20180823_limit_100")
+//          val platinumDeepVariantDf = spark.read.bigquery("ran-gcct-prj1.amst.platinum_genomes_deepvariant_variants_20180823_limit_100")
       .select("reference_name", "start_position", "end_position", "reference_bases", "alternate_bases", "call")
       .cache()
     platinumDeepVariantDf.createOrReplaceTempView("platinumDeepVariant")
@@ -49,7 +49,7 @@ object SparkBQExample {
 --        |LIMIT 10
         |""".stripMargin)
 
-    pDF1.printSchema()
+//    pDF1.printSchema()
 
     pDF1.createOrReplaceTempView("pDF1")
 
@@ -130,34 +130,6 @@ object SparkBQExample {
      * |-- col_alt: string (nullable = true)
      */
 
-
-    // Perform word count.
-    //    val testDF = spark.sql(
-    //      """SELECT
-    //        |    REPLACE(reference_name, 'chr', '') as reference_name,
-    //        |    reference_name as ref_name,
-    //        |    start_position,
-    //        |    end_position,
-    //        |    reference_bases,
-    //        |    alternate_bases.alt AS alt,
-    //        |    (SELECT COUNTIF(gt = alt_offset+1) FROM v.call call, call.genotype gt) AS num_variant_alleles,
-    //        |    (SELECT COUNTIF(gt >= 0) FROM v.call call, call.genotype gt) AS total_num_alleles
-    //        |  FROM platinumDeepVariant, UNNEST(v.alternate_bases) alternate_bases WITH OFFSET alt_offset
-    //        |  """.stripMargin)
-
-    //    val intervalDf = spark.sql(
-    //      """
-    //        |SELECT * FROM UNNEST ([
-    //        |    STRUCT<Gene STRING, Chr STRING, gene_start INT64, gene_end INT64, region_start INT64, region_end INT64>
-    //        |    ('PRCC', '1', 156736274, 156771607, 156636274, 156871607),
-    //        |    ('NTRK1', '1', 156785541, 156852640, 156685541, 156952640),
-    //        |    ('PAX8', '2', 113972574, 114037496, 113872574, 114137496),
-    //        |    ('FHIT', '3', 59734036, 61238131, 59634036, 61338131),
-    //        |    ('PPARG', '3', 12328349, 12476853, 12228349, 12576853)
-    //        |  ])
-    //        |""".stripMargin
-    //    )
-
     val intervalSchema = new StructType().add("Gene", StringType)
       .add("Chr", StringType)
       .add("gene_start", LongType)
@@ -217,7 +189,7 @@ object SparkBQExample {
 
 
     val hg19 = spark.read.bigquery("silver-wall-555.TuteTable.hg19")
-      //    val hg19 = spark.read.bigquery("ran-gcct-prj1.amst.hg19")
+//          val hg19 = spark.read.bigquery("ran-gcct-prj1.amst.hg19")
       .select("Chr", "Start", "Ref", "Alt", "Func", "Gene", "ExonicFunc", "PopFreqMax")
       //        .limit(10)
       .cache()
@@ -257,9 +229,9 @@ object SparkBQExample {
         |""".stripMargin
     )
 
-    result.printSchema()
+//    result.printSchema()
 
-    result.show(200)
+    result.show(200)   // At the time of writing, we get around 150 output records here.
 
     spark.stop()
   }
