@@ -6,8 +6,8 @@ version := "0.1"
 
 scalaVersion := "2.12.10"
 
-libraryDependencies += "org.apache.spark" %% "spark-core" % "2.4.5" //% "provided"
-libraryDependencies += "org.apache.spark" %% "spark-sql" % "2.4.5" //% "provided"
+libraryDependencies += "org.apache.spark" %% "spark-core" % "2.4.5" % "provided"
+libraryDependencies += "org.apache.spark" %% "spark-sql" % "2.4.5" % "provided"
 libraryDependencies += "com.google.cloud.spark" %% "spark-bigquery-with-dependencies" % "0.13.1-beta"
 
 enablePlugins(JavaAppPackaging)
