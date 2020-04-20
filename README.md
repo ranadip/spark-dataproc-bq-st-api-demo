@@ -38,5 +38,5 @@ Once the policy is created, a new Dataproc autoscaling cluster can be created us
 <br>
 Once the cluster is up and running, the following command can be used to run this program on the cluster: <br>
 `gcloud dataproc jobs submit spark --cluster test-cluster --region us-central1 \
-   --jars /Users/ranadip/IdeaProjects/sparkdemo/target/scala-2.12/sparkdemo-assembly-0.1.jar --class gcp.demo.SparkBQExample`
+   --jars [path to project]/sparkdemo/target/scala-2.12/sparkdemo-assembly-0.1.jar --class gcp.demo.SparkBQExample`
    
